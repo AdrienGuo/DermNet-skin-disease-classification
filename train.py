@@ -10,7 +10,7 @@ Kaggle: https://www.kaggle.com/datasets/shubhamgoel27/dermnet
 
 **About Dataset:**  
 The data consists of images of 23 types of skin diseases taken from http://www.dermnet.com/dermatology-pictures-skin-disease-pictures. The total number of images are around 19,500, out of which approximately 15,500 have been split in the training set and the remaining in the test set.
-Here, we only used five classes for a small test.
+Here, we only used 5 classes for a small test.
 """
 
 from dataset import dataset, print_class_info
@@ -58,7 +58,6 @@ def model():
     prediction_layer = tf.keras.layers.Dense(NUM_CLASSES, activation='relu', bias_regularizer=regularizers.l2(1e-4))
 
     model = Sequential([
-        # data_augmentation,
         resnet50,
         prediction_layer,
         layers.Flatten(),
@@ -67,25 +66,6 @@ def model():
     ])
 
     return model
-
-def model_test():
-    net = ResNet50(include_top=False,
-                    weights='imagenet',
-                    input_tensor=None,
-                    input_shape=(IMAGE_SIZE, IMAGE_SIZE, 3))
-    x = net.output
-    x = Flatten()(x)
-
-    # 增加 DropOut layer
-    x = Dropout(0.5)(x)
-
-    # 增加 Dense layer，以 softmax 產生個類別的機率值
-    output_layer = Dense(NUM_CLASSES, activation='softmax', name='softmax')(x)
-
-    # 設定凍結與要進行訓練的網路層
-    net_final = Model(inputs=net.input, outputs=output_layer)
-
-    return net_final
 
 def train(model, X, y, save_path, augment=False):
     # 使用 Adam optimizer，以較低的 learning rate 進行 fine-tuning
@@ -104,7 +84,6 @@ def train(model, X, y, save_path, augment=False):
 
 
 if __name__ == "__main__":
-    # AUTOTUNE = tf.data.AUTOTUNE
     data, labels, class_names = dataset(TRAIN_DIR, NUM_CLASSES)
 
     # Print the class labels and the corresponding names
