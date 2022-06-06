@@ -1,4 +1,4 @@
-from gan_parn import generate_fake_samples
+from gan import generate_fake_samples
 
 import os
 import numpy as np
@@ -29,7 +29,7 @@ def cal_generate_num(dir, num_classes):
     
     return generate_num, class_names
 
-def print_generate_num(dir, class_names, generate_num):
+def print_generate_num(class_names, generate_num):
     print("="*100)
     print("Generate dataset Info:")
     for idx, class_name in enumerate(class_names):
@@ -53,8 +53,7 @@ def generating_dataset(generators, generate_num):
         data.append(X)
         new_labels = np.linspace(idx, idx, num=generate_num[idx])
         labels.append(new_labels)
-        # data = np.concatenate([data, X], axis=0)
-        # labels = np.concatenate([labels, new_labels], axis=0)
+
     return data, labels
 
 # create and save a plot of generated images
