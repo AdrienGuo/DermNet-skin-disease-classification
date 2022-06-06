@@ -2,5 +2,5 @@ __pycache__/
 data/*
 data_test/
 Dermnet/
-image/
+image/GAN/
 model_save/
