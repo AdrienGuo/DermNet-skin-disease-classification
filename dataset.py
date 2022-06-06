@@ -45,6 +45,7 @@ def dataset(dir, num_classes, augment=False, origin=False, aug_data=None, aug_la
             X.append(np.array(img))
             y.append(class_i)
     
+    # The origin dataset
     if origin:
         pass
     # The transformed dataset
@@ -70,8 +71,6 @@ def dataset(dir, num_classes, augment=False, origin=False, aug_data=None, aug_la
 
     X = np.array(X)
     y = np.array(y)
-    # print("X shape: ", X.shape)
-    # print("y shape: ", y.shape)
     print_class_info(class_names, y)
 
     # convert from ints to floats
