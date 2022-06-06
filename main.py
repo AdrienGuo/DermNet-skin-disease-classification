@@ -1,9 +1,7 @@
 from dataset import dataset
-from train import BATCH_SIZE, model, train
+from train import model, train
 from utils import cal_generate_num, print_generate_num, generating_dataset
 from prediction import prediction
-
-import numpy as np
 
 from tensorflow.keras.models import load_model
 
