@@ -17,7 +17,7 @@ IMAGE_DIR = "./image/"
 MODEL_PATH = "./model_save/resnet50_wo_gan.h5"
 
 
-def prediction(model, data, labels, class_names, save_path, augment=False):
+def prediction(model, data, labels, class_names, save_path):
     preds = model.predict(data, batch_size=BATCH_SIZE)
     y_pred = np.argmax(preds, axis=-1)
     
